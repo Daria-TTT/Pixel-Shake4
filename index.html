@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Пиксель-Шейк СберKids</title>
+  <style>
+    /* Базовая тема: Тёмная (по умолчанию) */
+    :root,
+    body[data-theme="dark"] {
+      --bg-gradient: radial-gradient(circle at top, #1a2930 0%, #0e1117 70%);
+      --topbar-bg: rgba(28, 34, 45, 0.9);
+      --card-bg: #1c222d;
+      --card-border: #2c3545;
+      --quest-bg: linear-gradient(135deg, #222b3a, #19202b);
+      --slot-bg: #131720;
+      --cell-bg: #141923;
+      --cell-border: #2b3446;
+      --cell-zero-bg: #10141d;
+      --cell-zero-border: #181f2c;
+      --cell-num: rgba(255, 255, 255, 0.48);
+      --btn-bg: #252d3b;
+      --switch-bg: #12161f;
+      --text-main: #ffffff;
+      --text-muted: #9ba3b0;
+      --text-desc: #d1d7e0;
+      --sber-green: #21a038;
+      --sber-lime: #52f262;
+      --accent-purple: #8b5cf6;
+      --tag-bg: rgba(139, 92, 246, 0.25);
+      --tag-text: #c4b5fd;
+      --feedback-bg: rgba(33, 160, 56, 0.18);
+      --feedback-text: #e2f9e6;
+    }
+
+    /* ☀️ Светлая тема */
+    body[data-theme="light"] {
+      --bg-gradient: radial-gradient(circle at top, #f0fdf4 0%, #e2e8f0 75%);
+      --topbar-bg: rgba(255, 255, 255, 0.92);
+      --card-bg: #ffffff;
+      --card-border: #cbd5e1;
+      --quest-bg: linear-gradient(135deg, #ffffff, #f1f5f9);
+      --slot-bg: #f8fafc;
+      --cell-bg: #f1f5f9;
+      --cell-border: #cbd5e1;
+      --cell-zero-bg: #e2e8f0;
+      --cell-zero-border: #cbd5e1;
+      --cell-num: rgba(15, 23, 42, 0.55);
+      --btn-bg: #f1f5f9;
+      --switch-bg: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-desc: #334155;
+      --sber-green: #16a34a;
+      --sber-lime: #16a34a;
+      --accent-purple: #7c3aed;
+      --tag-bg: rgba(124, 58, 237, 0.14);
+      --tag-text: #6d28d9;
+      --feedback-bg: rgba(22, 163, 74, 0.14);
+      --feedback-text: #14532d;
+    }
+
+    /* 💜 Сиреневая тема */
+    body[data-theme="lilac"] {
+      --bg-gradient: radial-gradient(circle at top, #4c1d95 0%, #1e1035 75%);
+      --topbar-bg: rgba(46, 16, 101, 0.88);
+      --card-bg: #2e1554;
+      --card-border: #5b21b6;
+      --quest-bg: linear-gradient(135deg, #3b1c6e, #261047);
+      --slot-bg: #1f0d3d;
+      --cell-bg: #28114c;
+      --cell-border: #5b21b6;
+      --cell-zero-bg: #1a0933;
+      --cell-zero-border: #3b176b;
+      --cell-num: rgba(243, 232, 255, 0.6);
+      --btn-bg: #3b1c6e;
+      --switch-bg: #1a0933;
+      --text-main: #faf5ff;
+      --text-muted: #d8b4fe;
+      --text-desc: #e9d5ff;
+      --sber-green: #9333ea;
+      --sber-lime: #e879f9;
+      --accent-purple: #c084fc;
+      --tag-bg: rgba(232, 121, 249, 0.25);
+      --tag-text: #f5d0fe;
+      --feedback-bg: rgba(192, 132, 252, 0.22);
+      --feedback-text: #fae8ff;
+    }
+
+    /* 🌈 Радужная тема */
+    body[data-theme="rainbow"] {
+      --bg-gradient: linear-gradient(135deg, #450a0a 0%, #431407 18%, #3f3005 35%, #064e3b 52%, #0c4a6e 70%, #1e1b4b 85%, #3b0764 100%);
+      --topbar-bg: rgba(25, 20, 45, 0.88);
+      --card-bg: rgba(28, 25, 48, 0.88);
+      --card-border: #a855f7;
+      --quest-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(234, 179, 8, 0.18), rgba(34, 197, 94, 0.22), rgba(59, 130, 246, 0.22), rgba(168, 85, 247, 0.25));
+      --slot-bg: rgba(15, 15, 30, 0.85);
+      --cell-bg: rgba(32, 28, 58, 0.9);
+      --cell-border: #6366f1;
+      --cell-zero-bg: rgba(14, 12, 28, 0.85);
+      --cell-zero-border: rgba(99, 102, 241, 0.35);
+      --cell-num: rgba(255, 255, 255, 0.65);
+      --btn-bg: rgba(55, 45, 95, 0.9);
+      --switch-bg: rgba(15, 12, 30, 0.9);
+      --text-main: #ffffff;
+      --text-muted: #e2e8f0;
+      --text-desc: #fef08a;
+      --sber-green: #ec4899;
+      --sber-lime: #facc15;
+      --accent-purple: #38bdf8;
+      --tag-bg: rgba(250, 204, 21, 0.25);
+      --tag-text: #fef08a;
+      --feedback-bg: rgba(56, 189, 248, 0.22);
+      --feedback-text: #e0f2fe;
+    }
+
+    /* ❤️ 1. Красная */
+    body[data-theme="red"] {
+      --bg-gradient: radial-gradient(circle at top, #7f1d1d 0%, #2a0808 75%);
+      --topbar-bg: rgba(69, 10, 10, 0.9);
+      --card-bg: #450a0a;
+      --card-border: #b91c1c;
+      --quest-bg: linear-gradient(135deg, #631111, #3b0808);
+      --slot-bg: #2e0606;
+      --cell-bg: #3b0909;
+      --cell-border: #991b1b;
+      --cell-zero-bg: #240404;
+      --cell-zero-border: #450a0a;
+      --cell-num: rgba(254, 202, 202, 0.6);
+      --btn-bg: #5c1111;
+      --switch-bg: #240404;
+      --text-main: #fef2f2;
+      --text-muted: #fca5a5;
+      --text-desc: #fecaca;
+      --sber-green: #dc2626;
+      --sber-lime: #f87171;
+      --accent-purple: #fb7185;
+      --tag-bg: rgba(248, 113, 113, 0.25);
+      --tag-text: #fecaca;
+      --feedback-bg: rgba(239, 68, 68, 0.22);
+      --feedback-text: #fee2e2;
+    }
+
+    /* 🧡 2. Оранжевая */
+    body[data-theme="orange"] {
+      --bg-gradient: radial-gradient(circle at top, #7c2d12 0%, #271005 75%);
+      --topbar-bg: rgba(67, 20, 7, 0.9);
+      --card-bg: #431407;
+      --card-border: #c2410c;
+      --quest-bg: linear-gradient(135deg, #5f1f0a, #361005);
+      --slot-bg: #290b03;
+      --cell-bg: #381105;
+      --cell-border: #9a3412;
+      --cell-zero-bg: #1f0802;
+      --cell-zero-border: #431407;
+      --cell-num: rgba(254, 215, 170, 0.6);
+      --btn-bg: #571b09;
+      --switch-bg: #1f0802;
+      --text-main: #fff7ed;
+      --text-muted: #fdba74;
+      --text-desc: #fed7aa;
+      --sber-green: #ea580c;
+      --sber-lime: #fb923c;
+      --accent-purple: #f97316;
+      --tag-bg: rgba(251, 146, 60, 0.25);
+      --tag-text: #fed7aa;
+      --feedback-bg: rgba(249, 115, 22, 0.22);
+      --feedback-text: #ffedd5;
+    }
+
+    /* 💛 3. Жёлтая */
+    body[data-theme="yellow"] {
+      --bg-gradient: radial-gradient(circle at top, #713f12 0%, #261504 75%);
+      --topbar-bg: rgba(66, 32, 6, 0.9);
+      --card-bg: #3f2206;
+      --card-border: #ca8a04;
+      --quest-bg: linear-gradient(135deg, #573009, #331b04);
+      --slot-bg: #261403;
+      --cell-bg: #331b05;
+      --cell-border: #a16207;
+      --cell-zero-bg: #1c0f02;
+      --cell-zero-border: #422006;
+      --cell-num: rgba(254, 240, 138, 0.6);
+      --btn-bg: #522d08;
+      --switch-bg: #1c0f02;
+      --text-main: #fefce8;
+      --text-muted: #fde047;
+      --text-desc: #fef08a;
+      --sber-green: #ca8a04;
+      --sber-lime: #facc15;
+      --accent-purple: #eab308;
+      --tag-bg: rgba(250, 204, 21, 0.25);
+      --tag-text: #fef08a;
+      --feedback-bg: rgba(234, 179, 8, 0.22);
+      --feedback-text: #fef9c3;
+    }
+
+    /* 💚 4. Зелёная */
+    body[data-theme="green"] {
+      --bg-gradient: radial-gradient(circle at top, #14532d 0%, #051e11 75%);
+      --topbar-bg: rgba(5, 46, 22, 0.9);
+      --card-bg: #0b381e;
+      --card-border: #15803d;
+      --quest-bg: linear-gradient(135deg, #114c29, #082916);
+      --slot-bg: #052111;
+      --cell-bg: #092e18;
+      --cell-border: #166534;
+      --cell-zero-bg: #04170c;
+      --cell-zero-border: #0b381e;
+      --cell-num: rgba(187, 247, 208, 0.6);
+      --btn-bg: #124d2a;
+      --switch-bg: #04170c;
+      --text-main: #f0fdf4;
+      --text-muted: #86efac;
+      --text-desc: #bbf7d0;
+      --sber-green: #16a34a;
+      --sber-lime: #4ade80;
+      --accent-purple: #34d399;
+      --tag-bg: rgba(74, 222, 128, 0.25);
+      --tag-text: #bbf7d0;
+      --feedback-bg: rgba(34, 197, 94, 0.22);
+      --feedback-text: #dcfce7;
+    }
+
+    /* 🩵 5. Голубая */
+    body[data-theme="cyan"] {
+      --bg-gradient: radial-gradient(circle at top, #164e63 0%, #061c26 75%);
+      --topbar-bg: rgba(8, 51, 68, 0.9);
+      --card-bg: #0c3b4d;
+      --card-border: #0e7490;
+      --quest-bg: linear-gradient(135deg, #124d63, #092c3a);
+      --slot-bg: #06222e;
+      --cell-bg: #093040;
+      --cell-border: #155e75;
+      --cell-zero-bg: #041821;
+      --cell-zero-border: #0c3b4d;
+      --cell-num: rgba(165, 243, 252, 0.6);
+      --btn-bg: #134e63;
+      --switch-bg: #041821;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --text-desc: #a5f3fc;
+      --sber-green: #0891b2;
+      --sber-lime: #22d3ee;
+      --accent-purple: #38bdf8;
+      --tag-bg: rgba(34, 211, 238, 0.25);
+      --tag-text: #a5f3fc;
+      --feedback-bg: rgba(6, 182, 212, 0.22);
+      --feedback-text: #cffafe;
+    }
+
+    /* 💙 6. Синяя */
+    body[data-theme="blue"] {
+      --bg-gradient: radial-gradient(circle at top, #1e3a8a 0%, #09132e 75%);
+      --topbar-bg: rgba(23, 37, 84, 0.9);
+      --card-bg: #152759;
+      --card-border: #1d4ed8;
+      --quest-bg: linear-gradient(135deg, #1d3575, #101e45);
+      --slot-bg: #0b1636;
+      --cell-bg: #11214d;
+      --cell-border: #1e40af;
+      --cell-zero-bg: #081026;
+      --cell-zero-border: #152759;
+      --cell-num: rgba(191, 219, 254, 0.6);
+      --btn-bg: #1e3678;
+      --switch-bg: #081026;
+      --text-main: #eff6ff;
+      --text-muted: #93c5fd;
+      --text-desc: #bfdbfe;
+      --sber-green: #2563eb;
+      --sber-lime: #60a5fa;
+      --accent-purple: #818cf8;
+      --tag-bg: rgba(96, 165, 250, 0.25);
+      --tag-text: #bfdbfe;
+      --feedback-bg: rgba(59, 130, 246, 0.22);
+      --feedback-text: #dbeafe;
+    }
+
+    /* 🔮 7. Фиолетовая */
+    body[data-theme="violet"] {
+      --bg-gradient: radial-gradient(circle at top, #3b0764 0%, #130324 75%);
+      --topbar-bg: rgba(59, 7, 100, 0.9);
+      --card-bg: #270745;
+      --card-border: #7e22ce;
+      --quest-bg: linear-gradient(135deg, #380b61, #1e0536);
+      --slot-bg: #160329;
+      --cell-bg: #20063b;
+      --cell-border: #6b21a8;
+      --cell-zero-bg: #110221;
+      --cell-zero-border: #270745;
+      --cell-num: rgba(233, 213, 255, 0.6);
+      --btn-bg: #3a0d63;
+      --switch-bg: #110221;
+      --text-main: #f3e8ff;
+      --text-muted: #c084fc;
+      --text-desc: #e9d5ff;
+      --sber-green: #7e22ce;
+      --sber-lime: #c084fc;
+      --accent-purple: #a855f7;
+      --tag-bg: rgba(192, 132, 252, 0.25);
+      --tag-text: #e9d5ff;
+      --feedback-bg: rgba(147, 51, 234, 0.22);
+      --feedback-text: #f3e8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.2s ease;
+    }
+
+    /* Слой осадков поверх всего приложения (не блокирует ввод!) */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Верхняя панель навигации */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--topbar-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      gap: 6px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      border: 1px solid var(--card-border);
+      background: var(--btn-bg);
+      color: var(--text-main);
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.12s, background-color 0.2s, border-color 0.2s;
+    }
+
+    .close-btn:active {
+      transform: scale(0.92);
+    }
+
+    .close-btn.sound-on {
+      border-color: var(--sber-lime);
+      background: rgba(82, 242, 98, 0.15);
+    }
+
+    .close-btn.sound-off {
+      border-color: var(--card-border);
+      opacity: 0.65;
+    }
+
+    .mode-switch {
+      display: flex;
+      background: var(--switch-bg);
+      border-radius: 12px;
+      padding: 3px;
+      border: 1px solid var(--card-border);
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(90deg, var(--sber-green), var(--sber-lime));
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Полоска быстрого выбора темы */
+    .theme-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 7px 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .theme-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .theme-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .theme-dot.active {
+      transform: scale(1.18);
+      border-color: var(--text-main);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+    }
+
+    /* Основной контейнер */
+    .container {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 12px 16px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ================= СТИЛИ МЕССЕНДЖЕРА (TELEGRAM / WHATSAPP) ================= */
+    .messenger-wrap {
+      background: #0e1621;
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .sms-push {
+      background: rgba(30, 41, 59, 0.96);
+      border-bottom: 1px solid rgba(82, 242, 98, 0.4);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #f8fafc;
+      animation: slideDownPush 0.45s ease-out;
+    }
+
+    @keyframes slideDownPush {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .sms-push-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #21a038, #52f262);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .chat-header {
+      background: #17212b;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #101921;
+      color: #fff;
+    }
+
+    .chat-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      position: relative;
+    }
+
+    .chat-online-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 2px solid #17212b;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .chat-user-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .chat-user-status {
+      font-size: 11.5px;
+      color: #6ab3f3;
+    }
+
+    .chat-header-icons {
+      display: flex;
+      gap: 14px;
+      color: #6c7883;
+      font-size: 17px;
+      pointer-events: none;
+    }
+
+    .chat-unknown-bar {
+      background: rgba(245, 158, 11, 0.14);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 6px 12px;
+      font-size: 11.5px;
+      color: #fcd34d;
+      text-align: center;
+    }
+
+    .chat-messages {
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 250px;
+      background: radial-gradient(circle at center, #182533 0%, #0e1621 100%);
+    }
+
+    .msg-bubble {
+      max-width: 88%;
+      padding: 10px 12px 8px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      line-height: 1.38;
+      position: relative;
+      animation: msgPop 0.28s ease-out;
+    }
+
+    @keyframes msgPop {
+      from { transform: translateY(8px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .msg-incoming {
+      align-self: flex-start;
+      background: #182533;
+      color: #f5f5f5;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #243447;
+    }
+
+    .msg-outgoing {
+      align-self: flex-end;
+      background: #2b5278;
+      color: #ffffff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg-time {
+      font-size: 10.5px;
+      color: #6c7883;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .chat-feedback {
+      margin: 0 12px 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.35;
+      animation: msgPop 0.25s ease-out;
+    }
+
+    .chat-feedback.error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fecaca;
+    }
+
+    .chat-feedback.success {
+      background: linear-gradient(135deg, rgba(33, 160, 56, 0.32), rgba(139, 92, 246, 0.32));
+      border: 2px solid #52f262;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .chat-choices {
+      padding: 10px 12px 12px;
+      background: #17212b;
+      border-top: 1px solid #101921;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-choices-label {
+      font-size: 11.5px;
+      color: #8a9aa9;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid #2b5278;
+      background: #202b36;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.12s, background 0.2s, border-color 0.2s;
+    }
+
+    .choice-btn:active {
+      transform: scale(0.98);
+    }
+
+    .choice-btn:hover {
+      background: #283747;
+      border-color: #6ab3f3;
+    }
+
+    .chat-fake-inputbar {
+      background: #131c24;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #52616d;
+      font-size: 13px;
+      border-top: 1px solid #0e1621;
+      pointer-events: none;
+    }
+
+    /* ================= КОЛЛЕКЦИЯ И ВЫБОР ОТКРЫТЫХ ПРИКОЛОВ ================= */
+    .collection-bar {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .collection-bar.highlight-attention {
+      border-color: #ffaa33;
+      box-shadow: 0 0 14px rgba(255, 170, 51, 0.45);
+    }
+
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .collection-status-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reset-mini-btn {
+      background: var(--slot-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 2px 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .reset-mini-btn:active {
+      transform: scale(0.94);
+    }
+
+    .badges-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .badge-slot {
+      flex: 1;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--slot-bg);
+      border: 1px dashed var(--card-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      position: relative;
+      padding: 2px;
+    }
+
+    .badge-slot-caption {
+      font-size: 9px;
+      font-weight: 700;
+      margin-top: 2px;
+      color: var(--text-muted);
+      line-height: 1;
+    }
+
+    /* Разблокирован, но ещё НЕ выбран */
+    .badge-slot.unlocked {
+      border: 2px dashed var(--sber-lime);
+      background: rgba(82, 242, 98, 0.1);
+      animation: pulseUnlocked 2s infinite ease-in-out;
+    }
+
+    .badge-slot.unlocked .badge-slot-caption {
+      color: var(--sber-lime);
+    }
+
+    /* Разблокирован И выбран для тряски */
+    .badge-slot.active-effect {
+      border: 2px solid var(--sber-lime);
+      background: rgba(82, 242, 98, 0.24);
+      box-shadow: 0 0 14px rgba(82, 242, 98, 0.55);
+      transform: scale(1.05);
+      animation: none;
+    }
+
+    .badge-slot.active-effect .badge-slot-caption {
+      color: var(--text-main);
+    }
+
+    @keyframes pulseUnlocked {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    /* Карточка задания и обучения */
+    .quest-card {
+      background: var(--quest-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 12px 14px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .quest-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      margin-bottom: 6px;
+    }
+
+    .quest-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quest-desc {
+      font-size: 13px;
+      color: var(--text-desc);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    /* Подсказка / Обратная связь без наказаний */
+    .feedback-banner {
+      background: var(--feedback-bg);
+      border-left: 4px solid var(--sber-lime);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      line-height: 1.3;
+      color: var(--feedback-text);
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      transition: 0.2s;
+    }
+
+    .feedback-banner.warn {
+      background: rgba(255, 170, 51, 0.2);
+      border-left-color: #ffaa33;
+      color: var(--text-main);
+    }
+
+    /* Сетка пиксель-арта и окно превращения в эмодзи */
+    .grid-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: var(--slot-bg);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--sber-green), var(--sber-lime));
+      transition: width 0.2s ease;
+    }
+
+    .pixel-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      width: 100%;
+      max-width: 310px;
+      aspect-ratio: 1 / 1;
+      touch-action: none;
+    }
+
+    .pixel-cell {
+      border-radius: 8px;
+      background: var(--cell-bg);
+      border: 1px solid var(--cell-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cell-num);
+      cursor: pointer;
+      transition: transform 0.12s, background-color 0.15s, border-color 0.15s;
+    }
+
+    .pixel-cell.empty-bg {
+      background: var(--cell-zero-bg);
+      border-color: var(--cell-zero-border);
+      cursor: default;
+    }
+
+    .pixel-cell.filled {
+      color: transparent;
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: scale(0.98);
+    }
+
+    .pixel-cell.wrong-shake {
+      animation: cellShake 0.3s;
+    }
+
+    @keyframes cellShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    /* Окно с готовой картинкой-эмодзи вместо пикселей */
+    .emoji-reveal {
+      width: 100%;
+      max-width: 310px;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      background: radial-gradient(circle, rgba(82, 242, 98, 0.22) 0%, var(--slot-bg) 78%);
+      border: 2px solid var(--sber-lime);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 16px;
+      text-align: center;
+      animation: emojiPopIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .emoji-reveal:active {
+      transform: scale(0.96);
+    }
+
+    .emoji-reveal-icon {
+      font-size: 118px;
+      line-height: 1;
+      filter: drop-shadow(0 10px 24px rgba(82, 242, 98, 0.45));
+      animation: emojiFloat 2.4s ease-in-out infinite;
+    }
+
+    .emoji-reveal-title {
+      margin-top: 14px;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .emoji-reveal-hint {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-desc);
+    }
+
+    @keyframes emojiPopIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.4) rotate(-10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-10px) scale(1.05); }
+    }
+
+    /* Палитра цветов со смыслом */
+    .palette {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .color-btn {
+      flex: 1;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 14px;
+      padding: 8px 6px;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: 0.15s;
+    }
+
+    .color-btn.selected {
+      border-color: var(--text-main);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .color-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #0e1117;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .color-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    /* Нижние кнопки управления */
+    .actions-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #1db954, #52f262);
+      color: #09130c;
+    }
+
+    .btn-secondary {
+      background: var(--btn-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-shake {
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      color: #fff;
+    }
+
+    /* Блок награды после завершения картинки */
+    .reward-box {
+      background: rgba(139, 92, 246, 0.18);
+      border: 1px solid var(--accent-purple);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: popIn 0.25s ease-out;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Слой для падающих объектов при тряске (pointer-events: none) -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Шапка с кнопкой выхода, переключателем режимов, кнопкой темы и звука -->
+  <header class="topbar">
+    <button class="close-btn" id="btn-close" title="Закрыть игру (CLOSE_EVENT)">✕</button>
+    <div class="mode-switch">
+      <button class="mode-btn active" id="tab-chat">💬 Чат</button>
+      <button class="mode-btn" id="tab-game">🎨 Раскраска</button>
+    </div>
+    <div class="topbar-right">
+      <button class="close-btn" id="btn-theme" title="Сменить тему оформления">🌙</button>
+      <button class="close-btn sound-on" id="btn-sound" title="Включить / выключить звук «Ту-дуум!»">🔊</button>
+      <button class="close-btn" id="btn-share" title="Поделиться (SHARING_EVENT)">📤</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Быстрая палитра тем: Тёмная, Светлая, Сиреневая, Радуга и все 7 цветов радуги -->
+    <section class="theme-strip" id="theme-strip" aria-label="Выбор темы оформления"></section>
+
+    <!-- Полка открытых приколов при тряске (выбор активного эффекта) -->
+    <section class="collection-bar" id="collection-bar">
+      <div class="collection-header">
+        <span id="selected-effect-label">Эффект тряски: <b>не выбран</b></span>
+        <div class="collection-status-group">
+          <span id="collection-count">0 / 5 открыто</span>
+          <button class="reset-mini-btn" id="btn-reset-progress" title="Сбросить открытые эффекты">🔄 Сброс</button>
+        </div>
+      </div>
+      <div class="badges-row" id="badges-container"></div>
+    </section>
+
+    <!-- ================= РЕЖИМ 0: ЧАТ-КВЕСТ В МЕССЕНДЖЕРЕ ================= -->
+    <div id="view-chat" class="messenger-wrap">
+      <!-- Всплывающее пуш-уведомление с кодом от банка -->
+      <div class="sms-push">
+        <div class="sms-push-icon">💬</div>
+        <div>
+          <div style="font-weight: 700; color: #52f262;">СМС от СберKids • сейчас</div>
+          <div>Код подтверждения: <b>4829</b>. Никому не говорите код, даже близким!</div>
+        </div>
+      </div>
+
+      <!-- Шапка в стиле Телеграм / Ватсап (декоративная) -->
+      <div class="chat-header">
+        <div class="chat-user">
+          <div class="chat-avatar">
+            👩
+            <span class="chat-online-dot"></span>
+          </div>
+          <div>
+            <div class="chat-user-name">Мамочка ❤️</div>
+            <div class="chat-user-status">в сети • с нового номера</div>
+          </div>
+        </div>
+        <div class="chat-header-icons">
+          <span>📞</span>
+          <span>🔍</span>
+          <span>⋮</span>
+        </div>
+      </div>
+
+      <div class="chat-unknown-bar">
+        ⚠️ Номер не в списке контактов. Имя и фото скопированы.
+      </div>
+
+      <!-- Переписка в чате -->
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg-bubble msg-incoming">
+          Котёнок, привет! У меня на работе телефон разрядился, пишу тебе с чужого рабочего аккаунта 🙏
+          <div class="msg-time">14:21</div>
+        </div>
+
+        <div class="msg-bubble msg-incoming">
+          Я сейчас заказываю нам сюрприз с курьером, а моя карта почему-то не проходит! Я ввела твою СберКарту — тебе сейчас пришла СМС с 4 цифрами. Напиши мне скорее этот код сюда, курьер уже у двери ждёт! 🏃‍♂️💨
+          <div class="msg-time">14:22</div>
+        </div>
+      </div>
+
+      <!-- Окно реакции на выбор ребёнка (ошибка или похвала) -->
+      <div id="chat-feedback-box" class="chat-feedback hidden"></div>
+
+      <!-- Варианты ответа -->
+      <div class="chat-choices" id="chat-choices">
+        <div class="chat-choices-label">Как ты поступишь? Выбери ответ:</div>
+        <button class="choice-btn" id="btn-choice-wrong">
+          <span>📲</span>
+          <span>Да, сейчас пришлю</span>
+        </button>
+        <button class="choice-btn" id="btn-choice-right">
+          <span>🛡️</span>
+          <span>Ничего не отвечать и позвонить маме по её номеру телефона</span>
+        </button>
+      </div>
+
+      <!-- Декоративная строка ввода мессенджера (для красоты) -->
+      <div class="chat-fake-inputbar">
+        <span>📎 Сообщение...</span>
+        <span>😊 🎤</span>
+      </div>
+    </div>
+
+    <!-- ================= РЕЖИМ 1: ИГРА-РАСКРАСКА ================= -->
+    <div id="view-game" class="hidden" style="display: flex; flex-direction: column; gap: 12px;">
+      <section class="quest-card">
+        <span class="quest-tag" id="level-category">Финансовая грамотность</span>
+        <h2 class="quest-title">
+          <span id="level-title">Снежная Копилка</span>
+          <span id="level-reward-icon">❄️</span>
+        </h2>
+        <p class="quest-desc" id="level-lesson">
+          Копить деньги — как собирать снежинки! Выбирай цвет по правилу и закрашивай пиксели.
+        </p>
+      </section>
+
+      <div class="feedback-banner" id="feedback-box">
+        👆 Выбери цвет ниже и нажимай (или проводи пальцем) по клеточкам с таким же номером!
+      </div>
+
+      <section class="grid-wrapper">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <!-- Сетка пикселей -->
+        <div class="pixel-grid" id="pixel-grid"></div>
+
+        <!-- ФИЧА: Превращение пикселей в картинку-эмодзи оверлея при сборке пазла -->
+        <div class="emoji-reveal hidden" id="emoji-reveal" title="Нажми на открытый эффект на верхней полке, чтобы выбрать его!">
+          <div class="emoji-reveal-icon" id="emoji-reveal-icon">❄️</div>
+          <div class="emoji-reveal-title" id="emoji-reveal-title">Снежинки</div>
+          <div class="emoji-reveal-hint" id="emoji-reveal-hint">Эффект открыт! Нажми на него на верхней полке, чтобы выбрать для тряски ✨</div>
+        </div>
+      </section>
+
+      <!-- Блок поздравления, когда картинка собрана -->
+      <div class="reward-box hidden" id="reward-box">
+        <div style="font-size: 16px; font-weight: 700;" id="reward-text">
+          🎉 Ту-дуум! Ты разблокировал прикол: Снежинки!
+        </div>
+        <div style="font-size: 13px; color: var(--text-desc);" id="reward-subtext">
+          👆 Нажми на открытый эффект на верхней полке, чтобы выбрать его, и потряси телефон!
+        </div>
+        <button class="btn btn-primary" id="btn-next-random">
+          🎲 Следующая случайная картинка
+        </button>
+      </div>
+
+      <!-- Палитра с обучающими значениями -->
+      <section class="palette" id="palette-section">
+        <div class="palette-row" id="palette-container"></div>
+      </section>
+
+      <!-- Кнопки действий -->
+      <div class="actions-row">
+        <button class="btn btn-secondary" id="btn-hint">💡 Подсказка</button>
+        <button class="btn btn-shake" id="btn-shake-test">👋 Потрясти!</button>
+        <button class="btn btn-secondary" id="btn-random">🎲 Другая</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * 0. МЕНЕДЖЕР ТЕМ ОФОРМЛЕНИЯ (Тёмная, Светлая, Сиреневая, Радуга + 7 цветов радуги)
+     */
+    const APP_THEMES = [
+      { id: "dark",    name: "Тёмная",     icon: "🌙", preview: "#1c222d" },
+      { id: "light",   name: "Светлая",    icon: "☀️", preview: "#f8fafc" },
+      { id: "lilac",   name: "Сиреневая",  icon: "💜", preview: "#a855f7" },
+      { id: "rainbow", name: "Радужная",   icon: "🌈", preview: "linear-gradient(135deg,#ef4444,#f59e0b,#eab308,#22c55e,#06b6d4,#3b82f6,#a855f7)" },
+      { id: "red",     name: "Красная",    icon: "❤️", preview: "#ef4444" },
+      { id: "orange",  name: "Оранжевая",  icon: "🧡", preview: "#f97316" },
+      { id: "yellow",  name: "Жёлтая",     icon: "💛", preview: "#eab308" },
+      { id: "green",   name: "Зелёная",    icon: "💚", preview: "#22c55e" },
+      { id: "cyan",    name: "Голубая",    icon: "🩵", preview: "#06b6d4" },
+      { id: "blue",    name: "Синяя",      icon: "💙", preview: "#3b82f6" },
+      { id: "violet",  name: "Фиолетовая", icon: "🔮", preview: "#8b5cf6" }
+    ];
+
+    let currentThemeIndex = 0;
+    const savedThemeId = sessionStorage.getItem("sberkids_theme");
+    if (savedThemeId) {
+      const foundIdx = APP_THEMES.findIndex(t => t.id === savedThemeId);
+      if (foundIdx !== -1) currentThemeIndex = foundIdx;
+    }
+
+    function applyTheme(index, showFeedback = false) {
+      currentThemeIndex = (index + APP_THEMES.length) % APP_THEMES.length;
+      const theme = APP_THEMES[currentThemeIndex];
+      document.body.setAttribute("data-theme", theme.id);
+      sessionStorage.setItem("sberkids_theme", theme.id);
+
+      const themeBtn = document.getElementById("btn-theme");
+      if (themeBtn) {
+        themeBtn.textContent = theme.icon;
+        themeBtn.title = `Тема: ${theme.name} (нажми для смены)`;
+      }
+
+      renderThemeStrip();
+
+      if (showFeedback) {
+        const feedback = document.getElementById("feedback-box");
+        if (feedback) {
+          feedback.className = "feedback-banner";
+          feedback.textContent = `${theme.icon} Выбрана тема: «${theme.name}»!`;
+        }
+      }
+    }
+
+    function renderThemeStrip() {
+      const strip = document.getElementById("theme-strip");
+      if (!strip) return;
+      strip.innerHTML = "";
+
+      APP_THEMES.forEach((theme, idx) => {
+        const dot = document.createElement("button");
+        dot.className = "theme-dot" + (idx === currentThemeIndex ? " active" : "");
+        dot.style.background = theme.preview;
+        dot.title = `Тема: ${theme.name}`;
+        dot.textContent = theme.id === "light" || theme.id === "dark" || theme.id === "rainbow" ? theme.icon : "";
+        dot.addEventListener("click", () => {
+          RewardAudio.init();
+          initMotionSensor();
+          applyTheme(idx, true);
+        });
+        strip.appendChild(dot);
+      });
+    }
+
+    /**
+     * 1. ЗВУКОВОЙ ДВИЖОК НАГРАДЫ «ТУ-ДУУМ!» + РАБОТАЮЩАЯ КНОПКА ВКЛ/ВЫКЛ
+     */
+    const RewardAudio = {
+      ctx: null,
+      enabled: true,
+
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === "suspended") {
+          this.ctx.resume();
+        }
+      },
+
+      toggle() {
+        this.init();
+        this.enabled = !this.enabled;
+        const btn = document.getElementById("btn-sound");
+        const feedback = document.getElementById("feedback-box");
+
+        if (btn) {
+          btn.textContent = this.enabled ? "🔊" : "🔇";
+          btn.classList.toggle("sound-on", this.enabled);
+          btn.classList.toggle("sound-off", !this.enabled);
+        }
+
+        if (this.enabled) {
+          this.playTuDuum();
+          if (feedback) {
+            feedback.className = "feedback-banner";
+            feedback.textContent = "🔊 Звук включён! Заверши картинку, чтобы услышать победный «Ту-дуум!»";
+          }
+        } else {
+          if (feedback) {
+            feedback.className = "feedback-banner warn";
+            feedback.textContent = "🔇 Звук выключен. Нажми на иконку вверху, чтобы включить снова.";
+          }
+        }
+      },
+
+      playTuDuum() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+
+        // Слог 1: «ТУ»
+        this._playTone(196.00, "triangle", now, 0.13, 0.28);
+        this._playTone(392.00, "sine",     now, 0.13, 0.22);
+
+        // Слог 2: «ДУУМ!»
+        const duumStart = now + 0.14;
+        this._playTone(130.81, "triangle", duumStart, 0.95, 0.35);
+        this._playTone(261.63, "sine",     duumStart, 0.90, 0.25);
+        this._playTone(329.63, "triangle", duumStart, 0.90, 0.22);
+        this._playTone(392.00, "sine",     duumStart, 0.90, 0.20);
+        this._playTone(523.25, "sine",     duumStart, 1.00, 0.30);
+      },
+
+      _playTone(freq, type, startTime, duration, maxGain) {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.001, startTime);
+        gain.gain.linearRampToValueAtTime(maxGain, startTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      },
+
+      suspend() {
+        if (this.ctx && this.ctx.state === "running") {
+          this.ctx.suspend();
+        }
+      }
+    };
+
+    /**
+     * 2. CDN-КОНФИГУРАЦИЯ (Управляемость контентом без релиза приложения)
+     */
+    const CDN_LEVELS = [
+      {
+        id: "snow_piggy",
+        title: "Снежная Копилка",
+        category: "01 Финансовая грамотность",
+        lesson: "Если откладывать в копилку понемногу, вырастет целый сугроб сбережений!",
+        effectName: "Снежинки",
+        effectIcon: "❄️",
+        particles: ["❄️", "❅", "❆", "⚪"],
+        palette: [
+          { num: 1, color: "#38bdf8", label: "Отложить в копилку", rule: "Верно! Даже 50 рублей в неделю превращаются в большую сумму." },
+          { num: 2, color: "#f472b6", label: "Цель на мечту", rule: "Супер! Когда есть цель, копить намного интереснее." },
+          { num: 3, color: "#facc15", label: "Бонусы Спасибо", rule: "Отлично! Бонусами можно оплатить часть покупки." }
+        ],
+        grid: [
+          [0, 1, 1, 0, 1, 1, 0],
+          [1, 2, 2, 1, 2, 2, 1],
+          [1, 2, 3, 2, 3, 2, 1],
+          [1, 2, 2, 3, 2, 2, 1],
+          [0, 1, 2, 2, 2, 1, 0],
+          [0, 0, 1, 2, 1, 0, 0],
+          [0, 0, 0, 1, 0, 0, 0]
+        ]
+      },
+      {
+        id: "cyber_leaf",
+        title: "Щит Кибербезопасности",
+        category: "03 Безопасность",
+        lesson: "Секретный код из СМС — только твой! Никому не называй его, даже если звонят якобы из банка.",
+        effectName: "Осенние листики",
+        effectIcon: "🍁",
+        particles: ["🍁", "🍂", "🍃", "🧡"],
+        palette: [
+          { num: 1, color: "#22c55e", label: "Секретный пароль", rule: "Правильно! Надёжный пароль защищает твои деньги как крепкий щит." },
+          { num: 2, color: "#fb923c", label: "Проверка номера", rule: "Молодец! Всегда проверяй, кто пишет тебе в мессенджере." },
+          { num: 3, color: "#ef4444", label: "Стоп! Не скажу код", rule: "Точно! Настоящий банк никогда не просит код из СМС." }
+        ],
+        grid: [
+          [0, 1, 1, 1, 1, 1, 0],
+          [1, 2, 2, 3, 2, 2, 1],
+          [1, 2, 3, 3, 3, 2, 1],
+          [1, 2, 2, 3, 2, 2, 1],
+          [0, 1, 2, 2, 2, 1, 0],
+          [0, 0, 1, 2, 1, 0, 0],
+          [0, 0, 0, 1, 0, 0, 0]
+        ]
+      },
+      {
+        id: "dream_star",
+        title: "Звезда Мечты",
+        category: "01 Финансовая грамотность",
+        lesson: "Прежде чем потратить всё сразу, подумай: приближает ли это тебя к твоей главной мечте?",
+        effectName: "Звёздочки",
+        effectIcon: "⭐",
+        particles: ["⭐", "🌟", "✨", "💫"],
+        palette: [
+          { num: 1, color: "#facc15", label: "План покупок", rule: "Класс! Список покупок помогает не тратить деньги на лишнее." },
+          { num: 2, color: "#a855f7", label: "Большая мечта", rule: "Здорово! Большая мечта сбывается шаг за шагом." },
+          { num: 3, color: "#ffffff", label: "Умный выбор", rule: "Верно! Сравнивать цену и ценность — навык профи." }
+        ],
+        grid: [
+          [0, 0, 0, 1, 0, 0, 0],
+          [0, 0, 1, 2, 1, 0, 0],
+          [1, 1, 2, 3, 2, 1, 1],
+          [0, 1, 2, 3, 2, 1, 0],
+          [0, 1, 2, 1, 2, 1, 0],
+          [1, 0, 0, 0, 0, 0, 1],
+          [0, 0, 0, 0, 0, 0, 0]
+        ]
+      },
+      {
+        id: "deposit_gem",
+        title: "Кристалл Вклада",
+        category: "01 Финансовая грамотность",
+        lesson: "Вклад в банке помогает деньгам расти самим: банк начисляет проценты за хранение!",
+        effectName: "Кристаллы и монетки",
+        effectIcon: "💎",
+        particles: ["💎", "🪙", "💚", "✨"],
+        palette: [
+          { num: 1, color: "#10b981", label: "Вклад в банке", rule: "Отлично! На вкладе деньги в безопасности и приносят доход." },
+          { num: 2, color: "#34d399", label: "Проценты растут", rule: "Точно! Чем дольше лежат сбережения, тем больше бонус." },
+          { num: 3, color: "#a7f3d0", label: "Финансовый запас", rule: "Супер! Финансовая подушка выручит в любой момент." }
+        ],
+        grid: [
+          [0, 1, 1, 1, 1, 1, 0],
+          [1, 2, 2, 3, 2, 2, 1],
+          [1, 2, 3, 3, 3, 2, 1],
+          [0, 1, 2, 3, 2, 1, 0],
+          [0, 0, 1, 2, 1, 0, 0],
+          [0, 0, 0, 1, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0]
+        ]
+      },
+      {
+        id: "friend_flower",
+        title: "Цветок Дружбы",
+        category: "02 Мягкие навыки",
+        lesson: "Настоящая дружба — это умение слушать, поддерживать и договариваться без ссор.",
+        effectName: "Лепестки сакуры",
+        effectIcon: "🌸",
+        particles: ["🌸", "🌺", "💚", "💮"],
+        palette: [
+          { num: 1, color: "#ec4899", label: "Добрая поддержка", rule: "Тёплые слова помогают другу справиться с грустью!" },
+          { num: 2, color: "#fde047", label: "Договориться мирно", rule: "Любой спор можно решить спокойно, если выслушать друг друга." },
+          { num: 3, color: "#4ade80", label: "Общее дело", rule: "Вместе с друзьями любая задача решается веселее!" }
+        ],
+        grid: [
+          [0, 1, 1, 0, 1, 1, 0],
+          [1, 1, 2, 1, 2, 1, 1],
+          [1, 2, 2, 2, 2, 2, 1],
+          [0, 1, 1, 2, 1, 1, 0],
+          [0, 0, 0, 3, 0, 0, 0],
+          [0, 0, 3, 3, 3, 0, 0],
+          [0, 0, 0, 3, 0, 0, 0]
+        ]
+      }
+    ];
+
+    /**
+     * 3. МОСТ С НАТИВНЫМ ПРИЛОЖЕНИЕМ (5 обязательных событий ТЗ в фоне)
+     */
+    function sendAppEvent(eventType, extraPayload = {}) {
+      const message = { type: eventType, ...extraPayload };
+      window.parent.postMessage(message, "*");
+      window.postMessage(message, "*");
+    }
+
+    /**
+     * 4. ЛОГИКА ЧАТ-КВЕСТА («МАМА» И МОШЕННИКИ)
+     */
+    function switchScreen(mode) {
+      document.getElementById("tab-chat").classList.toggle("active", mode === "chat");
+      document.getElementById("tab-game").classList.toggle("active", mode === "game");
+
+      document.getElementById("view-chat").classList.toggle("hidden", mode !== "chat");
+      document.getElementById("view-game").classList.toggle("hidden", mode !== "game");
+    }
+
+    // Неправильный ответ: объясняем без наказаний и даём попробовать снова
+    document.getElementById("btn-choice-wrong").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      sendAppEvent("VIBRATION_EVENT", { style: "warning" });
+
+      const fb = document.getElementById("chat-feedback-box");
+      fb.className = "chat-feedback error";
+      fb.innerHTML = `
+        🛑 <b>Ой, осторожно! Это ловушка мошенников!</b><br>
+        Мошенники специально ставят фото мамы, пишут ласковые слова и торопят с курьером, чтобы украсть деньги по коду из СМС. Попробуй выбрать правильный ответ!
+      `;
+      fb.classList.remove("hidden");
+    });
+
+    // Правильный ответ: похвала + переход к раскраске
+    document.getElementById("btn-choice-right").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      RewardAudio.playTuDuum();
+
+      const chatMessages = document.getElementById("chat-messages");
+      if (!document.getElementById("msg-hero-reply")) {
+        const bubble = document.createElement("div");
+        bubble.id = "msg-hero-reply";
+        bubble.className = "msg-bubble msg-outgoing";
+        bubble.innerHTML = `
+          🛡️ Я ничего не буду писать в этот чат и сейчас сам позвоню маме по её настоящему номеру!
+          <div class="msg-time" style="color:#a5d8ff;">14:23 ✓✓</div>
+        `;
+        chatMessages.appendChild(bubble);
+      }
+
+      document.getElementById("chat-choices").classList.add("hidden");
+
+      const fb = document.getElementById("chat-feedback-box");
+      fb.className = "chat-feedback success";
+      fb.innerHTML = `
+        <div style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">
+          🎉 Какой ты молодец!
+        </div>
+        <div style="margin-bottom: 10px;">
+          Ты раскусил мошенников и защитил свою СберКарту! В награду тебе открывается пиксельная раскраска, где можно разблокировать эффекты тряски!
+        </div>
+        <button class="btn btn-primary" id="btn-go-coloring" style="width: 100%;">
+          🎨 Перейти к раскраске!
+        </button>
+      `;
+      fb.classList.remove("hidden");
+
+      document.getElementById("btn-go-coloring").addEventListener("click", () => {
+        initMotionSensor();
+        switchScreen("game");
+      });
+
+      setTimeout(() => {
+        if (!document.getElementById("view-chat").classList.contains("hidden")) {
+          switchScreen("game");
+        }
+      }, 2400);
+    });
+
+    /**
+     * 5. СОСТОЯНИЕ СЕССИИ, РАЗБЛОКИРОВКА И СТРОГИЙ ВЫБОР АКТИВНОГО ЭФФЕКТА
+     */
+    let unlockedIds = JSON.parse(sessionStorage.getItem("sberkids_unlocked") || "[]");
+    let selectedEffectId = sessionStorage.getItem("sberkids_selected_effect") || null;
+
+    if (selectedEffectId && !unlockedIds.includes(selectedEffectId)) {
+      selectedEffectId = null;
+    }
+
+    let activeShakeEffect = selectedEffectId
+      ? CDN_LEVELS.find(lvl => lvl.id === selectedEffectId) || null
+      : null;
+
+    let currentLevel = null;
+    let selectedColorNum = 1;
+    let filledCellsCount = 0;
+    let totalTargetCells = 0;
+    let isPointerDown = false;
+
+    function saveSessionState() {
+      sessionStorage.setItem("sberkids_unlocked", JSON.stringify(unlockedIds));
+      if (activeShakeEffect) {
+        sessionStorage.setItem("sberkids_selected_effect", activeShakeEffect.id);
+      } else {
+        sessionStorage.removeItem("sberkids_selected_effect");
+      }
+    }
+
+    function selectUnlockedEffect(lvl) {
+      if (!unlockedIds.includes(lvl.id)) return;
+      activeShakeEffect = lvl;
+      saveSessionState();
+      renderBadges();
+
+      const feedback = document.getElementById("feedback-box");
+      if (feedback) {
+        feedback.className = "feedback-banner";
+        feedback.textContent = `✨ Выбран эффект «${lvl.effectIcon} ${lvl.effectName}»! Теперь потряси телефон или нажми «👋 Потрясти!»`;
+      }
+    }
+
+    function pickRandomLevel() {
+      const unplayed = CDN_LEVELS.filter(lvl => !unlockedIds.includes(lvl.id));
+      const pool = unplayed.length > 0 ? unplayed : CDN_LEVELS;
+      const filtered = currentLevel && pool.length > 1
+        ? pool.filter(l => l.id !== currentLevel.id)
+        : pool;
+      const randomIndex = Math.floor(Math.random() * filtered.length);
+      loadLevel(filtered[randomIndex]);
+    }
+
+    function renderBadges() {
+      const container = document.getElementById("badges-container");
+      container.innerHTML = "";
+      document.getElementById("collection-count").textContent = `${unlockedIds.length} / ${CDN_LEVELS.length} открыто`;
+
+      const selectedLabel = document.getElementById("selected-effect-label");
+
+      if (activeShakeEffect && unlockedIds.includes(activeShakeEffect.id)) {
+        selectedLabel.innerHTML = `Эффект тряски: <b>${activeShakeEffect.effectIcon} ${activeShakeEffect.effectName}</b>`;
+      } else {
+        selectedLabel.innerHTML = unlockedIds.length > 0
+          ? `Эффект тряски: <b style="color:#ffaa33;">нажми на открытый ниже 👇</b>`
+          : `Эффект тряски: <b>не открыт 🔒</b>`;
+      }
+
+      CDN_LEVELS.forEach(lvl => {
+        const isUnlocked = unlockedIds.includes(lvl.id);
+        const isSelected = Boolean(
+          isUnlocked && activeShakeEffect && activeShakeEffect.id === lvl.id
+        );
+
+        const slot = document.createElement("div");
+        slot.className = "badge-slot" +
+          (isUnlocked ? " unlocked" : "") +
+          (isSelected ? " active-effect" : "");
+
+        const iconSpan = document.createElement("span");
+        iconSpan.textContent = isUnlocked ? lvl.effectIcon : "🔒";
+
+        const captionSpan = document.createElement("span");
+        captionSpan.className = "badge-slot-caption";
+        captionSpan.textContent = isSelected
+          ? "✓ Выбран"
+          : (isUnlocked ? "Выбрать" : "Закрыто");
+
+        slot.appendChild(iconSpan);
+        slot.appendChild(captionSpan);
+
+        slot.title = isSelected
+          ? `Активен: ${lvl.effectName} (потряси телефон!)`
+          : (isUnlocked
+              ? `Нажми, чтобы выбрать эффект «${lvl.effectName}» для тряски`
+              : "Сначала раскрась картинку, чтобы разблокировать этот эффект!");
+
+        slot.addEventListener("click", () => {
+          RewardAudio.init();
+          initMotionSensor();
+
+          if (isUnlocked) {
+            selectUnlockedEffect(lvl);
+          } else {
+            const feedback = document.getElementById("feedback-box");
+            if (feedback) {
+              feedback.className = "feedback-banner warn";
+              feedback.textContent = `🔒 Эффект «${lvl.effectName}» ещё закрыт! Докрась картинку до конца, чтобы открыть прикол.`;
+            }
+          }
+        });
+
+        container.appendChild(slot);
+      });
+    }
+
+    // Кнопка быстрого сброса прогресса
+    document.getElementById("btn-reset-progress").addEventListener("click", () => {
+      unlockedIds = [];
+      activeShakeEffect = null;
+      selectedEffectId = null;
+      saveSessionState();
+      particles = [];
+      renderBadges();
+      pickRandomLevel();
+
+      const feedback = document.getElementById("feedback-box");
+      if (feedback) {
+        feedback.className = "feedback-banner warn";
+        feedback.textContent = "🔄 Прогресс сброшен! Все эффекты снова закрыты (0 / 5). Раскрась картинку, чтобы открыть первый эффект!";
+      }
+    });
+
+    /**
+     * 6. ОТРИСОВКА КАРТИНКИ И ПАЛИТРЫ
+     */
+    function loadLevel(level) {
+      currentLevel = level;
+      selectedColorNum = level.palette[0].num;
+      filledCellsCount = 0;
+      totalTargetCells = 0;
+
+      document.getElementById("level-category").textContent = level.category;
+      document.getElementById("level-title").textContent = level.title;
+      document.getElementById("level-reward-icon").textContent = level.effectIcon;
+      document.getElementById("level-lesson").textContent = level.lesson;
+      document.getElementById("reward-box").classList.add("hidden");
+
+      const gridEl = document.getElementById("pixel-grid");
+      const emojiRevealEl = document.getElementById("emoji-reveal");
+      gridEl.classList.remove("hidden");
+      emojiRevealEl.classList.add("hidden");
+
+      const feedback = document.getElementById("feedback-box");
+      feedback.className = "feedback-banner";
+      feedback.textContent = `🎨 Выбран цвет №1 («${level.palette[0].label}»). Тапай по клеточкам с цифрой 1!`;
+
+      const paletteEl = document.getElementById("palette-container");
+      paletteEl.innerHTML = "";
+      level.palette.forEach(item => {
+        const btn = document.createElement("button");
+        btn.className = "color-btn" + (item.num === selectedColorNum ? " selected" : "");
+        btn.dataset.num = item.num;
+        btn.innerHTML = `
+          <div class="color-swatch" style="background:${item.color}">${item.num}</div>
+          <span class="color-label">${item.label}</span>
+        `;
+        btn.addEventListener("click", () => {
+          RewardAudio.init();
+          initMotionSensor();
+          selectedColorNum = item.num;
+          document.querySelectorAll(".color-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          feedback.className = "feedback-banner";
+          feedback.textContent = `💡 Правило №${item.num}: ${item.rule}`;
+        });
+        paletteEl.appendChild(btn);
+      });
+
+      gridEl.innerHTML = "";
+      level.grid.forEach(row => {
+        row.forEach(cellNum => {
+          const cell = document.createElement("div");
+          cell.className = "pixel-cell";
+          cell.dataset.target = cellNum;
+          cell.dataset.filled = "false";
+
+          if (cellNum === 0) {
+            cell.classList.add("empty-bg");
+            cell.dataset.filled = "true";
+          } else {
+            totalTargetCells++;
+            cell.textContent = cellNum;
+          }
+
+          cell.addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            RewardAudio.init();
+            isPointerDown = true;
+            tryPaintCell(cell);
+          });
+
+          cell.addEventListener("pointerenter", () => {
+            if (isPointerDown) tryPaintCell(cell);
+          });
+
+          gridEl.appendChild(cell);
+        });
+      });
+
+      updateProgress();
+      renderBadges();
+    }
+
+    document.getElementById("pixel-grid").addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (targetEl && targetEl.classList.contains("pixel-cell")) {
+        tryPaintCell(targetEl);
+      }
+    }, { passive: true });
+
+    window.addEventListener("pointerup", () => { isPointerDown = false; });
+
+    function tryPaintCell(cell) {
+      if (cell.dataset.filled === "true") return;
+      const targetNum = parseInt(cell.dataset.target, 10);
+      if (targetNum === 0) return;
+
+      const feedback = document.getElementById("feedback-box");
+
+      if (targetNum === selectedColorNum) {
+        const palItem = currentLevel.palette.find(p => p.num === targetNum);
+        cell.style.background = palItem.color;
+        cell.dataset.filled = "true";
+        cell.classList.add("filled");
+        filledCellsCount++;
+
+        sendAppEvent("VIBRATION_EVENT", { style: "light" });
+
+        feedback.className = "feedback-banner";
+        feedback.textContent = `✅ Супер! ${palItem.rule}`;
+        updateProgress();
+
+        if (filledCellsCount >= totalTargetCells) {
+          onPictureCompleted();
+        }
+      } else {
+        const neededPal = currentLevel.palette.find(p => p.num === targetNum);
+        cell.classList.remove("wrong-shake");
+        void cell.offsetWidth;
+        cell.classList.add("wrong-shake");
+
+        feedback.className = "feedback-banner warn";
+        feedback.textContent = `🤔 В этой клеточке цифра ${targetNum} («${neededPal.label}»). Выбери цвет №${targetNum} ниже и попробуй снова!`;
+      }
+    }
+
+    function updateProgress() {
+      const pct = totalTargetCells > 0 ? Math.round((filledCellsCount / totalTargetCells) * 100) : 0;
+      document.getElementById("progress-fill").style.width = pct + "%";
+    }
+
+    function onPictureCompleted() {
+      RewardAudio.playTuDuum();
+
+      if (!unlockedIds.includes(currentLevel.id)) {
+        unlockedIds.push(currentLevel.id);
+        saveSessionState();
+      }
+      renderBadges();
+
+      const gridEl = document.getElementById("pixel-grid");
+      const emojiRevealEl = document.getElementById("emoji-reveal");
+      document.getElementById("emoji-reveal-icon").textContent = currentLevel.effectIcon;
+      document.getElementById("emoji-reveal-title").textContent = currentLevel.effectName;
+      gridEl.classList.add("hidden");
+      emojiRevealEl.classList.remove("hidden");
+
+      const isAlreadySelected = activeShakeEffect && activeShakeEffect.id === currentLevel.id;
+      document.getElementById("emoji-reveal-hint").textContent = isAlreadySelected
+        ? "Эффект выбран! Потряси телефон прямо сейчас ✨"
+        : `Эффект разблокирован! Нажми на ${currentLevel.effectIcon} на верхней полке, чтобы выбрать его для тряски!`;
+
+      const rewardBox = document.getElementById("reward-box");
+      document.getElementById("reward-text").textContent =
+        `🎉 Ту-дуум! Картинка ожила! Разблокирован прикол: ${currentLevel.effectIcon} ${currentLevel.effectName}!`;
+      document.getElementById("reward-subtext").textContent = isAlreadySelected
+        ? "Потряси сам телефон прямо сейчас или нажми кнопку тряски!"
+        : `👆 Выбери иконку ${currentLevel.effectIcon} на верхней полке эффектов, чтобы активировать тряску!`;
+      rewardBox.classList.remove("hidden");
+
+      const feedback = document.getElementById("feedback-box");
+      if (feedback) {
+        feedback.className = "feedback-banner";
+        feedback.textContent = `🔓 Эффект «${currentLevel.effectIcon} ${currentLevel.effectName}» открыт! Нажми на него на верхней полке, чтобы выбрать для тряски.`;
+      }
+
+      sendAppEvent("COMPLETED_EVENT", {
+        levelId: currentLevel.id,
+        effect: currentLevel.effectName
+      });
+
+      if (unlockedIds.length === CDN_LEVELS.length) {
+        sendAppEvent("FINISH_EVENT", { allUnlocked: true });
+      }
+    }
+
+    document.getElementById("emoji-reveal").addEventListener("click", () => {
+      initMotionSensor();
+      triggerShakeEffect();
+    });
+
+    /**
+     * 7. ДВИЖОК ЧАСТИЦ ПРИ ТРЯСКЕ (МАКСИМАЛЬНО БЫСТРЫЙ ПОЛЁТ!)
+     * Срабатывает ТОЛЬКО после разблокировки И выбора конкретного эффекта!
+     */
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let animFrameId = null;
+    let stopTimerId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function highlightCollectionBar() {
+      const bar = document.getElementById("collection-bar");
+      if (!bar) return;
+      bar.classList.add("highlight-attention");
+      setTimeout(() => bar.classList.remove("highlight-attention"), 900);
+    }
+
+    function triggerShakeEffect() {
+      const feedback = document.getElementById("feedback-box");
+
+      // ПРОВЕРКА 1: Есть ли вообще разблокированные эффекты?
+      if (unlockedIds.length === 0) {
+        highlightCollectionBar();
+        if (feedback) {
+          feedback.className = "feedback-banner warn";
+          feedback.textContent = "🔒 У тебя пока нет открытых эффектов! Сначала докрась картинку до конца.";
+        }
+        return;
+      }
+
+      // ПРОВЕРКА 2: Выбран ли конкретный разблокированный эффект на верхней полке?
+      if (!activeShakeEffect || !unlockedIds.includes(activeShakeEffect.id)) {
+        highlightCollectionBar();
+        if (feedback) {
+          feedback.className = "feedback-banner warn";
+          feedback.textContent = "👆 Сначала выбери открытый эффект на верхней полке (нажми на иконку со словом «Выбрать»)!";
+        }
+        return;
+      }
+
+      const effectSource = activeShakeEffect;
+      sendAppEvent("VIBRATION_EVENT", { reason: "shake", effect: effectSource.effectName });
+
+      for (let i = 0; i < 36; i++) {
+        const emoji = effectSource.particles[Math.floor(Math.random() * effectSource.particles.length)];
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: -20 - Math.random() * 60,
+          vx: (Math.random() - 0.5) * 6.0,      // Быстрый разлёт
+          vy: 10.0 + Math.random() * 7.0,       // Стремительное падение
+          size: 22 + Math.random() * 14,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.16,   // Быстрое вращение
+          emoji: emoji
+        });
+      }
+
+      if (!animFrameId) {
+        animateParticles();
+      }
+
+      if (stopTimerId) clearTimeout(stopTimerId);
+      stopTimerId = setTimeout(() => {
+        if (particles.length === 0 && animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }, 1500);
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx + Math.sin(p.y * 0.03) * 1.2;
+        p.y += p.vy;
+        p.angle += p.spin;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.font = `${p.size}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(p.emoji, 0, 0);
+        ctx.restore();
+
+        if (p.y > canvas.height + 40) {
+          particles.splice(i, 1);
+        }
+      }
+
+      if (particles.length > 0) {
+        animFrameId = requestAnimationFrame(animateParticles);
+      } else {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /**
+     * 8. ДАТЧИК ФИЗИЧЕСКОЙ ТРЯСКИ УСТРОЙСТВА (Авто-активация для Android и iOS WebView)
+     */
+    let lastX = null, lastY = null, lastZ = null;
+    let lastShakeTime = 0;
+    let motionSensorAttached = false;
+
+    function attachMotionListeners() {
+      if (motionSensorAttached) return;
+      window.addEventListener("devicemotion", handleMotion, { passive: true });
+      motionSensorAttached = true;
+    }
+
+    function initMotionSensor() {
+      if (motionSensorAttached) return;
+
+      if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission()
+          .then(state => {
+            if (state === "granted") {
+              attachMotionListeners();
+            }
+          })
+          .catch(() => {});
+      } else if ("DeviceMotionEvent" in window) {
+        attachMotionListeners();
+      }
+    }
+
+    function handleMotion(event) {
+      const acc = event.accelerationIncludingGravity || event.acceleration;
+      if (!acc || (acc.x === null && acc.y === null && acc.z === null)) return;
+
+      const curX = acc.x || 0;
+      const curY = acc.y || 0;
+      const curZ = acc.z || 0;
+
+      if (lastX !== null) {
+        const delta = Math.abs(curX - lastX) + Math.abs(curY - lastY) + Math.abs(curZ - lastZ);
+        const now = Date.now();
+
+        if (delta > 14 && now - lastShakeTime > 500) {
+          lastShakeTime = now;
+          triggerShakeEffect();
+        }
+      }
+
+      lastX = curX;
+      lastY = curY;
+      lastZ = curZ;
+    }
+
+    if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission !== "function") {
+      attachMotionListeners();
+    }
+
+    document.addEventListener("click", () => {
+      initMotionSensor();
+    }, { passive: true });
+
+    /**
+     * 9. ОБРАБОТЧИКИ КНОПОК И ВКЛАДОК
+     */
+    document.getElementById("btn-theme").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      applyTheme(currentThemeIndex + 1, true);
+    });
+
+    document.getElementById("btn-sound").addEventListener("click", () => {
+      initMotionSensor();
+      RewardAudio.toggle();
+    });
+
+    document.getElementById("btn-shake-test").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      triggerShakeEffect();
+    });
+
+    document.getElementById("btn-random").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      pickRandomLevel();
+    });
+
+    document.getElementById("btn-next-random").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      pickRandomLevel();
+    });
+
+    document.getElementById("btn-hint").addEventListener("click", () => {
+      RewardAudio.init();
+      initMotionSensor();
+      const unfilled = Array.from(document.querySelectorAll('.pixel-cell[data-filled="false"]'));
+      if (unfilled.length === 0) return;
+      const cell = unfilled[0];
+      selectedColorNum = parseInt(cell.dataset.target, 10);
+      document.querySelectorAll(".color-btn").forEach(b => {
+        b.classList.toggle("selected", parseInt(b.dataset.num, 10) === selectedColorNum);
+      });
+      tryPaintCell(cell);
+    });
+
+    document.getElementById("btn-close").addEventListener("click", () => {
+      RewardAudio.suspend();
+      sendAppEvent("CLOSE_EVENT");
+    });
+
+    document.getElementById("btn-share").addEventListener("click", () => {
+      sendAppEvent("SHARING_EVENT", {
+        title: `Я прошёл чат-квест и собрал ${unlockedIds.length} из 5 пиксель-приколов в СберKids!`
+      });
+    });
+
+    document.getElementById("tab-chat").addEventListener("click", () => {
+      initMotionSensor();
+      switchScreen("chat");
+    });
+
+    document.getElementById("tab-game").addEventListener("click", () => {
+      initMotionSensor();
+      switchScreen("game");
+    });
+
+    // Остановка анимаций и звука при сворачивании вкладки/WebView (экономия ресурсов)
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        RewardAudio.suspend();
+        if (animFrameId) {
+          particles = [];
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+    });
+
+    // Первый запуск
+    applyTheme(currentThemeIndex, false);
+    pickRandomLevel();
+    switchScreen("chat");
+  </script>
+</body>
+</html>
